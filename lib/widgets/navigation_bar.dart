@@ -25,7 +25,7 @@ class CustomNavigationBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   border: isSelected
                       ? Border.all(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           width: 1,
                         )
                       : null,
@@ -38,7 +38,7 @@ class CustomNavigationBar extends StatelessWidget {
                       width: 24,
                       height: 24,
                       colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(isSelected ? 1.0 : 0.5),
+                        Colors.black.withValues(alpha: isSelected ? 1.0 : 0.5),
                         BlendMode.srcIn,
                       ),
                     ),
@@ -48,7 +48,7 @@ class CustomNavigationBar extends StatelessWidget {
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black.withOpacity(isSelected ? 1.0 : 0.5),
+                        color: Colors.black.withValues(alpha: isSelected ? 1.0 : 0.5),
                       ),
                     ),
                   ],

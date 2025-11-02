@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import '../screens/home_screen.dart';
-import '../screens/wallpaper_browse_screen.dart';
+import '../screens/browse_screen.dart';
 import '../screens/placeholder_screen.dart';
 
 enum WallpaperCategory {
@@ -38,18 +38,25 @@ enum NavigationItem {
   final String iconPath;
 }
 
+enum ViewMode {
+  grid,
+  list;
+}
+
 class WallpaperProvider with ChangeNotifier {
   NavigationItem _selectedNav = NavigationItem.home;
   WallpaperCategory? _selectedCategory;
   final List<String> _favoriteWallpapers = [];
   final List<String> _localWallpapers = [];
   bool _isLoading = false;
+  ViewMode _viewMode = ViewMode.grid;
 
   NavigationItem get selectedNav => _selectedNav;
   WallpaperCategory? get selectedCategory => _selectedCategory;
   List<String> get favoriteWallpapers => _favoriteWallpapers;
   List<String> get localWallpapers => _localWallpapers;
   bool get isLoading => _isLoading;
+  ViewMode get viewMode => _viewMode;
 
   void selectNavigationItem(NavigationItem item) {
     _selectedNav = item;
@@ -58,6 +65,16 @@ class WallpaperProvider with ChangeNotifier {
 
   void selectCategory(WallpaperCategory category) {
     _selectedCategory = category;
+    notifyListeners();
+  }
+
+  void toggleViewMode() {
+    _viewMode = _viewMode == ViewMode.grid ? ViewMode.list : ViewMode.grid;
+    notifyListeners();
+  }
+
+  void setViewMode(ViewMode mode) {
+    _viewMode = mode;
     notifyListeners();
   }
 
@@ -106,7 +123,7 @@ class WallpaperProvider with ChangeNotifier {
       case NavigationItem.home:
         return const HomeScreen();
       case NavigationItem.browse:
-        return const WallpaperBrowseScreen();
+        return const BrowseScreen();
       case NavigationItem.favourites:
         return const PlaceholderScreen(title: 'Favourites');
       case NavigationItem.settings:

@@ -25,13 +25,13 @@ class CategoryCard extends StatelessWidget {
             image: AssetImage(category.backgroundImage),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3),
+              Colors.black.withValues(alpha: 0.3),
               BlendMode.darken,
             ),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               offset: const Offset(0, 4),
               blurRadius: 10,
             ),
@@ -71,10 +71,10 @@ class CategoryCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                         width: 0.5,
                       ),
                     ),
