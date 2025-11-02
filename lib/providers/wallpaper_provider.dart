@@ -5,24 +5,26 @@ import '../screens/wallpaper_browse_screen.dart';
 import '../screens/placeholder_screen.dart';
 
 enum WallpaperCategory {
-  nature('Nature', 'Mountains, Forest and Landscapes', 3, Color(0xFF4CAF50)),
-  abstract('Abstract', 'Modern Geomentric and artistic designs', 4, Color(0xFF9C27B0)),
-  urban('Urban', 'Cities, architecture and street', 6, Color(0xFF2196F3)),
-  space('Space', 'Cosmos, planets, and galaxies', 3, Color(0xFF673AB7)),
-  minimalist('Minimalist', 'Clean, simple, and elegant', 6, Color(0xFF607D8B)),
-  animals('Animals', 'Wildlife and nature photography', 4, Color(0xFFFF9800));
+  nature('Nature', 'Mountains, Forest and Landscapes', 3, Color(0xFF4CAF50), 'assets/images/categories/nature_background.png'),
+  abstract('Abstract', 'Modern Geomentric and artistic designs', 4, Color(0xFF9C27B0), 'assets/images/categories/abstract_background.png'),
+  urban('Urban', 'Cities, architecture and street', 6, Color(0xFF2196F3), 'assets/images/categories/urban_background.png'),
+  space('Space', 'Cosmos, planets, and galaxies', 3, Color(0xFF673AB7), 'assets/images/categories/space_background.png'),
+  minimalist('Minimalist', 'Clean, simple, and elegant', 6, Color(0xFF607D8B), 'assets/images/categories/minimalist_background.png'),
+  animals('Animals', 'Wildlife and nature photography', 4, Color(0xFFFF9800), 'assets/images/categories/animals_background.png');
 
   const WallpaperCategory(
     this.displayName,
     this.description,
     this.wallpaperCount,
     this.color,
+    this.backgroundImage,
   );
 
   final String displayName;
   final String description;
   final int wallpaperCount;
   final Color color;
+  final String backgroundImage;
 }
 
 enum NavigationItem {

@@ -21,13 +21,13 @@ class CategoryCard extends StatelessWidget {
         height: 290.71,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(26),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              category.color.withOpacity(0.8),
-              category.color.withOpacity(0.6),
-            ],
+          image: DecorationImage(
+            image: AssetImage(category.backgroundImage),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.3),
+              BlendMode.darken,
+            ),
           ),
           boxShadow: [
             BoxShadow(
@@ -39,22 +39,6 @@ class CategoryCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Background pattern (subtle)
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(26),
-                  gradient: RadialGradient(
-                    center: const Alignment(0.8, -0.2),
-                    radius: 1.2,
-                    colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.transparent,
-                    ],
-                  ),
-                ),
-              ),
-            ),
             // Content
             Padding(
               padding: const EdgeInsets.all(25),
