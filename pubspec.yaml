@@ -102,3 +102,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: Clash Display
+      fonts:
+        - asset: assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Medium.ttf
+          weight: 500

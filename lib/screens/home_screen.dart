@@ -71,26 +71,22 @@ class HomeScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Discover Beautiful ',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xFFFBB03B),
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Wallpapers',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 60,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xFFEC0C43),
-                                  ),
-                                ),
-                              ],
+                          ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFFFBB03B), Color(0xFFEC0C43)],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ).createShader(bounds),
+                            child: const Text(
+                              'Discover Beautiful Wallpapers',
+                              style: TextStyle(
+                                fontFamily: 'Clash Display',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 60,
+                                height: 1.0,
+                                letterSpacing: 0.0,
+                                color: Colors.white, // This will be replaced by the gradient
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
