@@ -198,7 +198,8 @@ class FavouritesScreen extends StatelessWidget {
                         Positioned(
                           bottom: 0,
                           left: 0,
-                          right: 0,
+                          width: 190,
+                          height: 99,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Column(
@@ -241,32 +242,16 @@ class FavouritesScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Heart button at top-right
+                // Heart button at top-right - heart shape icon
+                // Position: x: 137, y: 12 (relative to card 190.18px wide)
+                // So right = 190.18 - 137 - 40 = 13.18
                 Positioned(
                   top: 12,
-                  right: 12,
-                  child: Container(
+                  right: 13.18,
+                  child: SvgPicture.asset(
+                    'assets/icons/heart_icon_filled.svg',
                     width: 40,
                     height: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.5),
-                        width: 0.5,
-                      ),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        'assets/icons/heart_filled.svg',
-                        width: 18,
-                        height: 16,
-                        colorFilter: const ColorFilter.mode(
-                          Color(0xFFFFA821),
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ],
