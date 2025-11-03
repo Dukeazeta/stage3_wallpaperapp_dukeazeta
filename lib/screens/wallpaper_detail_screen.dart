@@ -236,8 +236,10 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                               _buildMainPreview(),
                             ],
                           ),
-                          // Action Buttons
+                          const SizedBox(height: 40),
+                          // Action Buttons - Right aligned
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               // Save to Favorites Button
                               Container(
@@ -273,7 +275,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                                             'assets/icons/heart_button.svg',
                                             width: 24,
                                             height: 24,
-                                            colorFilter: ColorFilter.mode(
+                                            colorFilter: const ColorFilter.mode(
                                               Colors.black,
                                               BlendMode.srcIn,
                                             ),
