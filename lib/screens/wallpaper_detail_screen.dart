@@ -131,9 +131,9 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Left Section - Related Wallpapers
-                  Expanded(
-                    flex: 1,
+                  // Left Section - Related Wallpapers (611px width)
+                  SizedBox(
+                    width: 611,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -191,23 +191,24 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                     ),
                   ),
                   const SizedBox(width: 50),
-                  // Right Section - Preview and Details
-                  Expanded(
-                    flex: 1,
+                  // Right Section - Preview and Details (661px width)
+                  SizedBox(
+                    width: 661,
                     child: Container(
                       padding: const EdgeInsets.all(40),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFFFFFFFF),
+                            Color(0x00FFFFFF),
+                          ],
+                        ),
                         borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            offset: const Offset(0, 4),
-                            blurRadius: 10,
-                          ),
-                        ],
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           // Preview Section
@@ -235,13 +236,13 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                               _buildMainPreview(),
                             ],
                           ),
-                          const SizedBox(height: 40),
                           // Action Buttons
                           Row(
                             children: [
-                              Expanded(
+                              SizedBox(
+                                width: 200,
+                                height: 50,
                                 child: Container(
-                                  height: 50,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border.all(
@@ -294,9 +295,10 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                                 ),
                               ),
                               const SizedBox(width: 20),
-                              Expanded(
+                              SizedBox(
+                                width: 200,
+                                height: 50,
                                 child: Container(
-                                  height: 50,
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFFBB03B),
                                     borderRadius: BorderRadius.circular(21),
@@ -346,7 +348,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
         decoration: BoxDecoration(
           color: isActive ? const Color(0xFFF5F5F5) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: isActive ? Border.all(color: Colors.black.withOpacity(0.1)) : null,
+          border: isActive ? Border.all(color: Colors.black.withValues(alpha: 0.1)) : null,
         ),
         child: Row(
           children: [
@@ -379,15 +381,18 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
       children: [
         Row(
           children: [
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[0]),
             ),
             const SizedBox(width: 20),
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[1]),
             ),
             const SizedBox(width: 20),
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[2]),
             ),
           ],
@@ -395,15 +400,18 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
         const SizedBox(height: 23),
         Row(
           children: [
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[3]),
             ),
             const SizedBox(width: 20),
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[4]),
             ),
             const SizedBox(width: 20),
-            Expanded(
+            SizedBox(
+              width: 190.18,
               child: _buildRelatedWallpaperItem(relatedWallpapers[5]),
             ),
           ],
@@ -534,24 +542,74 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
               width: 3.31,
             ),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(26.69),
-            child: Image.asset(
-              widget.imagePath,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(
-                      Icons.image,
-                      size: 50,
-                      color: Colors.grey,
-                    ),
+          child: Stack(
+            children: [
+              // Wallpaper image with padding
+              Positioned(
+                left: 4.76,
+                top: 2.48,
+                width: 248.51,
+                height: 520.03,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(26.69),
+                  child: Image.asset(
+                    widget.imagePath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+              // Notch
+              Positioned(
+                left: 92.83,
+                top: 17.27,
+                width: 72.36,
+                height: 20.88,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              // Camera/Sensor dot
+              Positioned(
+                left: 150.2,
+                top: 22.33,
+                width: 10.13,
+                height: 10.13,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF2A2A2A),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+              // Home indicator
+              Positioned(
+                left: 86.99,
+                bottom: 16.83,
+                width: 84.05,
+                height: 2.58,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 24.82),
@@ -559,7 +617,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -618,7 +676,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
             const SizedBox(height: 4),
             Wrap(
               spacing: 12,
-              runSpacing: 8,
+              runSpacing: 12,
               children: widget.tags.map((tag) {
                 return Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
