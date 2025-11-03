@@ -34,6 +34,26 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
     {'name': 'Nature 6', 'image': 'assets/images/nature6.png', 'category': 'Nature'},
   ];
 
+  // Current wallpaper state
+  String currentImagePath = '';
+  String currentWallpaperName = '';
+  String currentCategory = '';
+  List<String> currentTags = [];
+  String currentDescription = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize with widget values
+    currentImagePath = widget.imagePath;
+    currentWallpaperName = widget.wallpaperName;
+    currentCategory = widget.category;
+    currentTags = widget.tags.isNotEmpty ? widget.tags : ['Nature', 'Ambience', 'Flowers'];
+    currentDescription = widget.description.isNotEmpty 
+        ? widget.description 
+        : 'Discover the pure beauty of Natural Essence – your gateway to authentic, nature-inspired experiences.';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,7 +189,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.category,
+                              currentCategory,
                               style: const TextStyle(
                                 fontFamily: 'Clash Display',
                                 fontSize: 48,
@@ -255,10 +275,10 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                                 ),
                                 child: Consumer<WallpaperProvider>(
                                   builder: (context, provider, child) {
-                                    final isFavorite = provider.isFavorite(widget.imagePath);
+                                    final isFavorite = provider.isFavorite(currentImagePath);
                                     return GestureDetector(
                                       onTap: () {
-                                        provider.toggleFavorite(widget.imagePath);
+                                        provider.toggleFavorite(currentImagePath);
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(
                                             content: Text(
@@ -423,18 +443,14 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
   Widget _buildRelatedWallpaperItem(Map<String, String> wallpaper) {
     return GestureDetector(
       onTap: () {
-        // Navigate to wallpaper detail
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WallpaperDetailScreen(
-              wallpaperName: wallpaper['name']!,
-              imagePath: wallpaper['image']!,
-              category: wallpaper['category']!,
-              tags: ['Nature', 'Ambience', 'Flowers'],
-              description: 'Discover the pure beauty of Natural Essence – your gateway to authentic, nature-inspired experiences.',
-            ),
-          ),
-        );
+        // Update the preview with the selected wallpaper
+        setState(() {
+          currentImagePath = wallpaper['image']!;
+          currentWallpaperName = wallpaper['name']!;
+          currentCategory = wallpaper['category']!;
+          currentTags = ['Nature', 'Ambience', 'Flowers'];
+          currentDescription = 'Discover the pure beauty of Natural Essence – your gateway to authentic, nature-inspired experiences.';
+        });
       },
       child: Container(
         height: 290.71,
@@ -531,47 +547,88 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
   Widget _buildMainPreview() {
     return Column(
       children: [
-        // Use the actual downloaded phone preview
-        Image.asset(
-          'assets/images/phone_preview.png',
+        Container(
           width: 258.04,
           height: 524.99,
-          fit: BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              width: 258.04,
-              height: 524.99,
-              decoration: BoxDecoration(
-                color: const Color(0xFFD9D9D9),
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 3.31,
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(26.69),
-                child: Image.asset(
-                  widget.imagePath,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey[300],
-                      child: const Center(
-                        child: Icon(
-                          Icons.image,
-                          size: 50,
-                          color: Colors.grey,
+          decoration: BoxDecoration(
+            color: const Color(0xFFD9D9D9),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: Colors.black,
+              width: 3.31,
+            ),
+          ),
+          child: Stack(
+            children: [
+              // Wallpaper image with exact positioning to match phone frame
+              Positioned(
+                left: 4.76,
+                top: 2.48,
+                right: 4.77,
+                bottom: 2.48,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(26.69),
+                  child: Image.asset(
+                    currentImagePath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
-            );
-          },
+              // Notch
+              Positioned(
+                left: 92.83,
+                top: 17.27,
+                width: 72.36,
+                height: 20.88,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              // Camera/Sensor dot
+              Positioned(
+                left: 150.2,
+                top: 22.33,
+                width: 10.13,
+                height: 10.13,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF2A2A2A),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+              // Home indicator
+              Positioned(
+                left: 86.99,
+                bottom: 16.83,
+                width: 84.05,
+                height: 2.58,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-          ],
+      ],
     );
   }
 
@@ -593,7 +650,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              widget.wallpaperName,
+              currentWallpaperName,
               style: GoogleFonts.poppins(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
@@ -619,7 +676,7 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
             Wrap(
               spacing: 12,
               runSpacing: 12,
-              children: widget.tags.map((tag) {
+              children: currentTags.map((tag) {
                 return Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
@@ -666,8 +723,8 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                 ).createShader(bounds),
                 blendMode: BlendMode.srcIn,
                 child: Text(
-                  widget.description.isNotEmpty
-                      ? widget.description
+                  currentDescription.isNotEmpty
+                      ? currentDescription
                       : 'Discover the pure beauty of "Natural Essence" – your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world. Embrace "Natural Essence" for a truly organic transformation in your daily life.',
                   style: GoogleFonts.poppins(
                     fontSize: 14,
