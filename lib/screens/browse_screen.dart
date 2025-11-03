@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers/wallpaper_provider.dart';
+import 'wallpaper_detail_screen.dart';
 
 class BrowseScreen extends StatelessWidget {
   const BrowseScreen({super.key});
@@ -257,7 +258,17 @@ class BrowseScreen extends StatelessWidget {
   Widget _buildCategoryCard(BuildContext context, WallpaperCategory category) {
     return GestureDetector(
       onTap: () {
-        // Navigate to category wallpapers
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WallpaperDetailScreen(
+              wallpaperName: '${category.displayName} 1',
+              imagePath: 'assets/images/preview_main.png',
+              category: category.displayName,
+              tags: [category.displayName, 'Ambience', 'Nature'],
+              description: 'Discover the pure beauty of ${category.displayName} – your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world.',
+            ),
+          ),
+        );
       },
       child: Container(
         width: double.infinity,
@@ -343,7 +354,17 @@ class BrowseScreen extends StatelessWidget {
   Widget _buildListCategoryCard(BuildContext context, WallpaperCategory category) {
     return GestureDetector(
       onTap: () {
-        // Navigate to category wallpapers
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WallpaperDetailScreen(
+              wallpaperName: '${category.displayName} 1',
+              imagePath: 'assets/images/preview_main.png',
+              category: category.displayName,
+              tags: [category.displayName, 'Ambience', 'Nature'],
+              description: 'Discover the pure beauty of ${category.displayName} – your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world.',
+            ),
+          ),
+        );
       },
       child: Container(
         width: double.infinity,
