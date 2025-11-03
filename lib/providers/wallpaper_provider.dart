@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import '../screens/home_screen.dart';
 import '../screens/browse_screen.dart';
+import '../screens/favourites_screen.dart';
 import '../screens/placeholder_screen.dart';
 
 enum WallpaperCategory {
@@ -125,7 +126,7 @@ class WallpaperProvider with ChangeNotifier {
       case NavigationItem.browse:
         return const BrowseScreen();
       case NavigationItem.favourites:
-        return const PlaceholderScreen(title: 'Favourites');
+        return const FavouritesScreen();
       case NavigationItem.settings:
         return const PlaceholderScreen(title: 'Settings');
     }

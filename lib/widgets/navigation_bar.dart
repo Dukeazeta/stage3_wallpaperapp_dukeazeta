@@ -22,7 +22,7 @@ class CustomNavigationBar extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 12),
                 decoration: BoxDecoration(
                   color: isSelected ? const Color(0xFFF5F5F5) : Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   border: isSelected
                       ? Border.all(
                           color: Colors.black.withValues(alpha: 0.1),
