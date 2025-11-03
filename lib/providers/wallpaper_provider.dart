@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import '../screens/home_screen.dart';
 import '../screens/browse_screen.dart';
 import '../screens/favourites_screen.dart';
-import '../screens/placeholder_screen.dart';
+import '../screens/settings_screen.dart';
 
 enum WallpaperCategory {
   nature('Nature', 'Mountains, Forest and Landscapes', 3, Color(0xFF4CAF50), 'assets/images/categories/nature_background.png'),
@@ -128,7 +128,7 @@ class WallpaperProvider with ChangeNotifier {
       case NavigationItem.favourites:
         return const FavouritesScreen();
       case NavigationItem.settings:
-        return const PlaceholderScreen(title: 'Settings');
+        return const SettingsScreen();
     }
   }
 }
