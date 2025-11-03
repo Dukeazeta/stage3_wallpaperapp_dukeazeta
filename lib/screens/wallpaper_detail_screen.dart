@@ -239,87 +239,85 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
                           // Action Buttons
                           Row(
                             children: [
-                              SizedBox(
+                              // Save to Favorites Button
+                              Container(
                                 width: 200,
                                 height: 50,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                      color: const Color(0xFFDFDFDF),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(21),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF8F8F8),
+                                  border: Border.all(
+                                    color: const Color(0xFFDFDFDF),
+                                    width: 1,
                                   ),
-                                  child: Consumer<WallpaperProvider>(
-                                    builder: (context, provider, child) {
-                                      final isFavorite = provider.isFavorite(widget.imagePath);
-                                      return GestureDetector(
-                                        onTap: () {
-                                          provider.toggleFavorite(widget.imagePath);
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                isFavorite ? 'Removed from favorites' : 'Added to favorites',
-                                              ),
-                                              duration: const Duration(seconds: 2),
+                                  borderRadius: BorderRadius.circular(21),
+                                ),
+                                child: Consumer<WallpaperProvider>(
+                                  builder: (context, provider, child) {
+                                    final isFavorite = provider.isFavorite(widget.imagePath);
+                                    return GestureDetector(
+                                      onTap: () {
+                                        provider.toggleFavorite(widget.imagePath);
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              isFavorite ? 'Removed from favorites' : 'Added to favorites',
                                             ),
-                                          );
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                              'assets/icons/heart.svg',
-                                              width: 18,
-                                              height: 16,
-                                              colorFilter: ColorFilter.mode(
-                                                isFavorite ? Colors.red : Colors.black,
-                                                BlendMode.srcIn,
-                                              ),
+                                            duration: const Duration(seconds: 2),
+                                          ),
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/icons/heart_button.svg',
+                                            width: 24,
+                                            height: 24,
+                                            colorFilter: ColorFilter.mode(
+                                              Colors.black,
+                                              BlendMode.srcIn,
                                             ),
-                                            const SizedBox(width: 10),
-                                            Text(
-                                              isFavorite ? 'Remove from Favorites' : 'Save to Favorites',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.black,
-                                              ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            isFavorite ? 'Remove from Favorites' : 'Save to Favorites',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
                                             ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                               const SizedBox(width: 20),
-                              SizedBox(
+                              // Set to Wallpaper Button
+                              Container(
                                 width: 200,
                                 height: 50,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFFBB03B),
-                                    borderRadius: BorderRadius.circular(21),
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                          content: Text('Wallpaper set successfully!'),
-                                          duration: Duration(seconds: 2),
-                                        ),
-                                      );
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'Set to Wallpaper',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                        ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFBB03B),
+                                  borderRadius: BorderRadius.circular(21),
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Wallpaper set successfully!'),
+                                        duration: Duration(seconds: 2),
+                                      ),
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Set to Wallpaper',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
@@ -531,105 +529,47 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
   Widget _buildMainPreview() {
     return Column(
       children: [
-        Container(
+        // Use the actual downloaded phone preview
+        Image.asset(
+          'assets/images/phone_preview.png',
           width: 258.04,
           height: 524.99,
-          decoration: BoxDecoration(
-            color: const Color(0xFFD9D9D9),
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(
-              color: Colors.black,
-              width: 3.31,
-            ),
-          ),
-          child: Stack(
-            children: [
-              // Wallpaper image with padding
-              Positioned(
-                left: 4.76,
-                top: 2.48,
-                width: 248.51,
-                height: 520.03,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(26.69),
-                  child: Image.asset(
-                    widget.imagePath,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: Icon(
-                            Icons.image,
-                            size: 50,
-                            color: Colors.grey,
-                          ),
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              width: 258.04,
+              height: 524.99,
+              decoration: BoxDecoration(
+                color: const Color(0xFFD9D9D9),
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 3.31,
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(26.69),
+                child: Image.asset(
+                  widget.imagePath,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[300],
+                      child: const Center(
+                        child: Icon(
+                          Icons.image,
+                          size: 50,
+                          color: Colors.grey,
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              // Notch
-              Positioned(
-                left: 92.83,
-                top: 17.27,
-                width: 72.36,
-                height: 20.88,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              // Camera/Sensor dot
-              Positioned(
-                left: 150.2,
-                top: 22.33,
-                width: 10.13,
-                height: 10.13,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2A2A2A),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              // Home indicator
-              Positioned(
-                left: 86.99,
-                bottom: 16.83,
-                width: 84.05,
-                height: 2.58,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
-        const SizedBox(height: 24.82),
-        // Preview label
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            'Preview',
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ],
+          ],
     );
   }
 
@@ -713,21 +653,33 @@ class _WallpaperDetailScreenState extends State<WallpaperDetailScreen> {
             const SizedBox(height: 4),
             SizedBox(
               width: 280.81,
-              child: Text(
-                widget.description.isNotEmpty
-                    ? widget.description
-                    : 'Discover the pure beauty of "Natural Essence" – your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world. Embrace "Natural Essence" for a truly organic transformation in your daily life.',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                  height: 1.5,
+              child: ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF000000),
+                    Color(0xFFFFFFFF),
+                  ],
+                ).createShader(bounds),
+                blendMode: BlendMode.srcIn,
+                child: Text(
+                  widget.description.isNotEmpty
+                      ? widget.description
+                      : 'Discover the pure beauty of "Natural Essence" – your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world. Embrace "Natural Essence" for a truly organic transformation in your daily life.',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    height: 1.5,
+                  ),
                 ),
               ),
             ),
-          ],
+            ],
         ),
       ],
     );
   }
-}
+
+  }

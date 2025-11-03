@@ -196,7 +196,7 @@ class BrowseScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: isActive ? const Color(0xFFF5F5F5) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: isActive ? Border.all(color: Colors.black.withOpacity(0.1)) : null,
+          border: isActive ? Border.all(color: Colors.black.withValues(alpha: 0.1)) : null,
         ),
         child: Row(
           children: [
