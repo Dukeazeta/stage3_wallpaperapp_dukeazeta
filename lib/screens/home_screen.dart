@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/wallpaper_provider.dart';
 import '../widgets/category_card.dart';
 import '../widgets/navigation_bar.dart';
+import 'wallpaper_detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -152,7 +153,17 @@ class HomeScreen extends StatelessWidget {
                               return CategoryCard(
                                 category: category,
                                 onTap: () {
-                                  provider.selectCategory(category);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => WallpaperDetailScreen(
+                                        wallpaperName: '${category.displayName} 1',
+                                        imagePath: category.backgroundImage,
+                                        category: category.displayName,
+                                        tags: [category.displayName, 'Ambience', 'Featured'],
+                                        description: 'Discover the pure beauty of ${category.displayName} – your gateway to authentic, ${category.displayName.toLowerCase()}-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the ${category.displayName.toLowerCase()} world.',
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             },
