@@ -7,8 +7,8 @@ A modern Flutter desktop application for browsing, downloading, and setting wall
 - **GitHub Repository:** [View on GitHub](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta)
 - **Windows Installer:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/WallpaperApp-Setup.exe)
 - **macOS Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.app.tar.gz)
-- **Demo Video:** [Watch Demo](#)
-- **Figma Design:** [View Figma File](#)
+- **Demo Video:** [Watch Demo](https://www.loom.com/share/9bf21025e48a4ebfa7c6d7219c94dc82)
+- **Figma Design:** [View Figma File](https://www.figma.com/design/WnHFPfZ7uW2vxy4sHqtb12/MOBILE-WALLPAPER-SELECTOR?node-id=0-1&p=f&t=2uDO3enoMFIThi2n-0)
 
 ## 🚀 Setup & Installation
 
