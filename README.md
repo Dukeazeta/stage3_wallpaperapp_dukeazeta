@@ -3,8 +3,10 @@
 A modern Flutter desktop application for browsing, downloading, and setting wallpapers on Windows, macOS, and Linux.
 
 ## 🔗 Links
-- **Windows (.exe) Download:** [Download exe](#)
-- **macOS (.app) Download:** [Download macOS app](#)
+
+- **GitHub Repository:** [View on GitHub](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta)
+- **Windows (.exe) Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.exe)
+- **macOS (.app) Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.app.tar.gz)
 - **Demo Video:** [Watch Demo](#)
 - **Figma Design:** [View Figma File](#)
 
