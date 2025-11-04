@@ -2,6 +2,9 @@ name: Build Desktop Releases
 
 on:
   push:
+    branches:
+      - main
+      - master
     tags:
       - 'v*'
   workflow_dispatch:
