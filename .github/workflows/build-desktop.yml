@@ -31,33 +31,21 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Verify build output
+      - name: Install Inno Setup
         run: |
-          Write-Host "Checking build directories..."
-          Get-ChildItem -Path build/windows -Recurse -Directory | Select-Object FullName
-          Write-Host "Looking for Release folder..."
-          Get-ChildItem -Path build/windows -Filter "Release" -Recurse -Directory | Select-Object FullName
+          choco install innosetup -y
         shell: pwsh
 
-      - name: Package Windows release
+      - name: Build Windows Installer
         run: |
-          if (Test-Path "build/windows/x64/runner/Release") {
-            cd build/windows/x64/runner/Release
-            Compress-Archive -Path * -DestinationPath ../../../../../stage3_wallpaperapp_dukeazeta-windows.zip
-          } elseif (Test-Path "build/windows/runner/Release") {
-            cd build/windows/runner/Release
-            Compress-Archive -Path * -DestinationPath ../../../../stage3_wallpaperapp_dukeazeta-windows.zip
-          } else {
-            Write-Error "Release folder not found!"
-            exit 1
-          }
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows\installer.iss
         shell: pwsh
 
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-release
-          path: stage3_wallpaperapp_dukeazeta-windows.zip
+          path: windows/installer_output/WallpaperApp-Setup.exe
 
   build-macos:
     name: Build macOS
@@ -157,17 +145,17 @@ jobs:
             ## 🎉 Release ${{ steps.generate_tag.outputs.VERSION }}
             
             ### Downloads
-            - **Windows:** `stage3_wallpaperapp_dukeazeta-windows.zip`
-            - **macOS:** `stage3_wallpaperapp_dukeazeta.app.tar.gz`
+            - **Windows Installer:** `WallpaperApp-Setup.exe` - Download and run to install
+            - **macOS:** `stage3_wallpaperapp_dukeazeta.app.tar.gz` - Download, extract, and run
             
-            ### Installation
-            - **Windows:** Download the `.zip` file, extract it, and run `stage3_wallpaperapp_dukeazeta.exe`
-            - **macOS:** Download the `.app.tar.gz` file, extract it, and run the app
+            ### Installation Instructions
+            - **Windows:** Download the installer, run it, and follow the setup wizard. The app will be installed to your Program Files and a desktop shortcut will be created.
+            - **macOS:** Download the `.app.tar.gz` file, extract it, and move the app to your Applications folder.
             
             ---
             Built automatically from commit ${{ github.sha }}
           files: |
-            ./release-artifacts/stage3_wallpaperapp_dukeazeta-windows.zip
+            ./release-artifacts/WallpaperApp-Setup.exe
             ./release-artifacts/stage3_wallpaperapp_dukeazeta.app.tar.gz
           draft: false
           prerelease: false
