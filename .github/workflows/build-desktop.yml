@@ -31,11 +31,33 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
+      - name: Verify build output
+        run: |
+          Write-Host "Checking build directories..."
+          Get-ChildItem -Path build/windows -Recurse -Directory | Select-Object FullName
+          Write-Host "Looking for Release folder..."
+          Get-ChildItem -Path build/windows -Filter "Release" -Recurse -Directory | Select-Object FullName
+        shell: pwsh
+
+      - name: Package Windows release
+        run: |
+          if (Test-Path "build/windows/x64/runner/Release") {
+            cd build/windows/x64/runner/Release
+            Compress-Archive -Path * -DestinationPath ../../../../../stage3_wallpaperapp_dukeazeta-windows.zip
+          } elseif (Test-Path "build/windows/runner/Release") {
+            cd build/windows/runner/Release
+            Compress-Archive -Path * -DestinationPath ../../../../stage3_wallpaperapp_dukeazeta-windows.zip
+          } else {
+            Write-Error "Release folder not found!"
+            exit 1
+          }
+        shell: pwsh
+
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-release
-          path: build/windows/runner/Release/stage3_wallpaperapp_dukeazeta.exe
+          path: stage3_wallpaperapp_dukeazeta-windows.zip
 
   build-macos:
     name: Build macOS
@@ -135,17 +157,17 @@ jobs:
             ## 🎉 Release ${{ steps.generate_tag.outputs.VERSION }}
             
             ### Downloads
-            - **Windows:** `stage3_wallpaperapp_dukeazeta.exe`
+            - **Windows:** `stage3_wallpaperapp_dukeazeta-windows.zip`
             - **macOS:** `stage3_wallpaperapp_dukeazeta.app.tar.gz`
             
             ### Installation
-            - **Windows:** Download the `.exe` file and run it
+            - **Windows:** Download the `.zip` file, extract it, and run `stage3_wallpaperapp_dukeazeta.exe`
             - **macOS:** Download the `.app.tar.gz` file, extract it, and run the app
             
             ---
             Built automatically from commit ${{ github.sha }}
           files: |
-            ./release-artifacts/stage3_wallpaperapp_dukeazeta.exe
+            ./release-artifacts/stage3_wallpaperapp_dukeazeta-windows.zip
             ./release-artifacts/stage3_wallpaperapp_dukeazeta.app.tar.gz
           draft: false
           prerelease: false

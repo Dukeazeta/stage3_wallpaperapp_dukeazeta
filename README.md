@@ -5,8 +5,8 @@ A modern Flutter desktop application for browsing, downloading, and setting wall
 ## 🔗 Links
 
 - **GitHub Repository:** [View on GitHub](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta)
-- **Windows (.exe) Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.exe)
-- **macOS (.app) Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.app.tar.gz)
+- **Windows Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta-windows.zip)
+- **macOS Download:** [Download Latest Release](https://github.com/Dukeazeta/stage3_wallpaperapp_dukeazeta/releases/latest/download/stage3_wallpaperapp_dukeazeta.app.tar.gz)
 - **Demo Video:** [Watch Demo](#)
 - **Figma Design:** [View Figma File](#)
 
